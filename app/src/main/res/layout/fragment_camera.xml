@@ -1,195 +1,157 @@
 <?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/bg_main_gradient"
+    android:fitsSystemWindows="true">
 
-    <androidx.constraintlayout.widget.ConstraintLayout
-        xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        xmlns:tools="http://schemas.android.com/tools"
+    <!-- Header Section -->
+    <LinearLayout
+        android:id="@+id/headerLayout"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-    android:fitsSystemWindows="true"
-    >
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        android:padding="24dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/appNameTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:text="textX"
+            android:textColor="@color/primaryColor"
+            android:textSize="42sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:alpha="0.7"
+            android:text="Extract text from images"
+            android:textColor="@color/text_primary"
+            android:textSize="16sp" />
+    </LinearLayout>
+
+    <!-- Camera Preview Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/cameraCard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="12dp"
+        app:layout_constraintBottom_toTopOf="@+id/controlsLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout">
 
         <androidx.camera.view.PreviewView
             android:id="@+id/viewFinder"
             android:layout_width="match_parent"
-            android:layout_height="0dp"
-            app:layout_constraintBottom_toTopOf="@id/AdFrame"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
+            android:layout_height="match_parent" />
 
-        </androidx.camera.view.PreviewView>
-
-        <FrameLayout
-            android:id="@+id/AdFrame"
+        <!-- Subtle Inner Bottom Shadow for Card -->
+        <View
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:padding="2dp"
-            app:layout_constraintBottom_toBottomOf="parent">
+            android:layout_height="40dp"
+            android:layout_gravity="bottom"
+            android:background="@drawable/card_shadow_blue" />
+    </androidx.cardview.widget.CardView>
 
-        </FrameLayout>
+    <!-- Controls Section -->
+    <LinearLayout
+        android:id="@+id/controlsLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:gravity="center"
+        android:orientation="vertical"
+        android:padding="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/AdFrame">
 
+        <!-- Primary Actions -->
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_alignParentBottom="true"
-            android:layout_centerHorizontal="true"
-            android:orientation="vertical"
-            app:layout_constraintBottom_toTopOf="@id/AdFrame">
+            android:gravity="center"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/GalleryButton"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginEnd="24dp"
+                android:background="@drawable/btn_teal_clay"
+                android:contentDescription="Gallery"
+                android:padding="16dp"
+                android:src="@drawable/ic_baseline_photo_library_24"
+                app:tint="@color/white" />
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/imageCaptureButton"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:layout_gravity="center_horizontal"
-                android:layout_marginBottom="10dp"
-                android:layout_weight="1"
-                android:clickable="true"
-                android:contentDescription="image Capture Button"
+                android:backgroundTint="@color/accent_purple"
                 android:src="@drawable/ic_baseline_camera_24"
-                app:fabCustomSize="70dp"
-                app:maxImageSize="50dp" />
+                app:fabCustomSize="84dp"
+                app:maxImageSize="42dp"
+                app:tint="@color/white" />
 
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:orientation="horizontal"
-                android:paddingLeft="10dp"
-                android:paddingTop="5dp"
-                android:paddingRight="10dp">
-
-                <Button
-                    android:id="@+id/ModeLanguageButton"
-                    style="@style/Widget.Material3.Button.Icon"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="0"
-                    android:text="English"
-                    app:icon="@drawable/ic_baseline_translate_24" />
-
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <Button
-                    android:id="@+id/FlashButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="5dp"
-                    android:layout_marginRight="5dp"
-                    android:layout_weight="0"
-                    android:text="Flash"
-                    app:icon="@drawable/ic_baseline_flash_on_24" />
-
-                <!--     <Button
-                    style="@style/Widget.Material3.Button.Icon"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_gravity="center"
-                    android:layout_weight="1"
-                    android:text="Capture &amp; Scan"
-                    android:textAlignment="center"
-                    android:textSize="16sp"
-                    app:icon="@drawable/ic_baseline_camera_24" />
-    -->
-            </LinearLayout>
-
-            <LinearLayout
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_gravity="center"
-                android:orientation="horizontal">
-
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/PicModeButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:clickable="true"
-
-                    android:src="@drawable/ic_baseline_screen_rotation_24"
-                    android:visibility="gone" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1"
-                    android:visibility="gone" />
-
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/GalleryButton"
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="13dp"
-                    android:layout_weight="0"
-                    android:clickable="true"
-                    android:contentDescription="Gallery Button"
-                    android:cropToPadding="false"
-                    android:src="@drawable/ic_baseline_photo_library_24"
-                    app:icon="@drawable/ic_baseline_photo_library_24"
-
-                    app:useCompatPadding="true" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/HistoryButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:clickable="true"
-                    android:contentDescription="History Button"
-                    android:src="@drawable/ic_baseline_history_24"
-                    app:useCompatPadding="true" />
-
-                <Space
-                    android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="1" />
-
-                <com.google.android.material.floatingactionbutton.FloatingActionButton
-                    android:id="@+id/SettingsButton"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_weight="0"
-                    android:clickable="true"
-                    android:contentDescription="Settings Button"
-                    android:src="@drawable/ic_baseline_settings_50"
-                    app:useCompatPadding="true" />
-
-            </LinearLayout>
+            <ImageButton
+                android:id="@+id/FlashButton"
+                android:layout_width="64dp"
+                android:layout_height="64dp"
+                android:layout_marginStart="24dp"
+                android:background="@drawable/btn_teal_clay"
+                android:contentDescription="Flash"
+                android:padding="16dp"
+                android:src="@drawable/ic_baseline_flash_on_24"
+                app:tint="@color/white" />
 
         </LinearLayout>
 
-    </androidx.constraintlayout.widget.ConstraintLayout>
-
-    <!--     <ImageView
-            android:id="@+id/imagePreview"
-            android:layout_width="0dp"
-            android:layout_height="0dp"
-            android:scaleType="fitXY"
-            android:visibility="visible"
-            app:layout_constraintBottom_toBottomOf="@+id/viewFinder"
-            app:layout_constraintEnd_toEndOf="@+id/viewFinder"
-            app:layout_constraintStart_toStartOf="@+id/viewFinder"
-            app:layout_constraintTop_toTopOf="@+id/viewFinder" />
-
-        <ImageView
-            android:id="@+id/TxOverlay"
+        <!-- Secondary Navigation -->
+        <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:alpha="0.4"
-            android:src="@drawable/overlay"
-            android:visibility="gone" />
-    </RelativeLayout>
-        -->
+            android:layout_marginTop="24dp"
+            android:gravity="center"
+            android:orientation="horizontal">
 
+            <Button
+                android:id="@+id/ModeLanguageButton"
+                style="@style/Widget.textX.Button.Teal"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="English"
+                app:icon="@drawable/ic_baseline_translate_24" />
+
+            <Button
+                android:id="@+id/HistoryButton"
+                style="@style/Widget.textX.Button.Purple"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginEnd="8dp"
+                android:text="History"
+                app:icon="@drawable/ic_baseline_history_24" />
+
+            <ImageButton
+                android:id="@+id/SettingsButton"
+                android:layout_width="48dp"
+                android:layout_height="48dp"
+                android:background="@drawable/btn_purple_clay"
+                android:src="@drawable/ic_baseline_settings_50"
+                app:tint="@color/white" />
+        </LinearLayout>
+
+    </LinearLayout>
+
+    <FrameLayout
+        android:id="@+id/AdFrame"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        app:layout_constraintBottom_toBottomOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

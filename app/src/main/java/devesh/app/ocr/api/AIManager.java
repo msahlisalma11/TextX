@@ -21,7 +21,7 @@ public class AIManager {
     private static final String TAG = "AIManager";
 
     // Groq API Key
-    private final String groqApiKey = "YOUR_GROQ_API_KEY_HERE";
+    private final String groqApiKey = "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";
     
     // Groq API Endpoint (OpenAI compatible)
     private static final String API_URL = "https://api.groq.com/openai/v1/chat/completions";

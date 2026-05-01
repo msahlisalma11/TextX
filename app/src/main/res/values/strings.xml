@@ -19,6 +19,35 @@
     <string name="Pref_isMultiline">onelinetext</string>
     <string name="Pref_isSubscribed">issub</string>
 
+    <!-- Firebase Web Client ID -->
+    <string name="default_web_client_id" translatable="false">833690862091-36c11mvdd2jpoctjeesu1sssdn4eod2r.apps.googleusercontent.com</string>
+
+    <!-- UI Strings -->
+    <string name="home_subtitle">Extract text from images</string>
+    <string name="login_subtitle">Extract text from images</string>
+    <string name="history_title">History</string>
+    <string name="settings_title">Settings</string>
+    <string name="all_scans">All Scans</string>
+    <string name="summarized">Summarized</string>
+    <string name="today">Today</string>
+    <string name="no_history">No history found</string>
+    <string name="summary_title">AI Note</string>
+    <string name="label_original_text">Original Text</string>
+    <string name="label_ai_analysis">AI Analysis</string>
+    <string name="btn_summarize">Summarize with AI</string>
+    <string name="processing">Processing...</string>
+
+    <!-- Settings Strings -->
+    <string name="settings_recognition">Recognition</string>
+    <string name="settings_single_line">Single Line Text</string>
+    <string name="settings_single_line_desc">Convert multiline paragraphs into a single line</string>
+    <string name="settings_language">Language</string>
+    <string name="settings_ocr_lang">OCR Language</string>
+    <string name="settings_about">About</string>
+    <string name="settings_rate">Rate App 5 Stars</string>
+    <string name="settings_check_update">Check for Update</string>
+    <string name="settings_privacy">Privacy Policy</string>
+
     <!--SMS Drive-->
     <string name="MoreApps_SMS_Drive">SMS Drive</string>
     <string name="MoreApps_SMS_Drive_desc">Backup solution to sync your SMS messages across devices</string>

@@ -1,12 +1,16 @@
 package devesh.app.ocr;
 
 import android.content.Intent;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.net.Uri;
 import android.os.Bundle;
 import android.util.Log;
+import android.widget.TextView;
 
 import androidx.appcompat.app.ActionBar;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
 import androidx.preference.Preference;
 import androidx.preference.PreferenceFragmentCompat;
 
@@ -17,27 +21,39 @@ import devesh.app.ocr.utils.InstallSource;
 
 public class SettingsActivity extends AppCompatActivity {
     SettingsActivityBinding binding;
-    AdMobAPI adMobAPI;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = SettingsActivityBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        adMobAPI = new AdMobAPI(this);
+        
+        applyTitleGradient();
+
         if (savedInstanceState == null) {
             getSupportFragmentManager()
                     .beginTransaction()
                     .replace(binding.settings.getId(), new SettingsFragment())
                     .commit();
-
-
         }
+        
         ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
-        adMobAPI.setAdaptiveBanner(binding.AdFrameLayout, this);
+    }
+
+    private void applyTitleGradient() {
+        binding.settingsTitle.post(() -> {
+            float width = binding.settingsTitle.getPaint().measureText(binding.settingsTitle.getText().toString());
+            Shader textShader = new LinearGradient(0, 0, width, 0,
+                    new int[]{
+                            ContextCompat.getColor(this, R.color.accent_purple),
+                            ContextCompat.getColor(this, R.color.accent_teal)
+                    }, null, Shader.TileMode.CLAMP);
+            binding.settingsTitle.getPaint().setShader(textShader);
+            binding.settingsTitle.invalidate();
+        });
     }
 
 
@@ -52,8 +68,8 @@ public class SettingsActivity extends AppCompatActivity {
             cachePref = new CachePref(getActivity());
 
             Preference PrefRateApp = findPreference("ratekey");
-            PrefRateApp.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                public boolean onPreferenceClick(Preference preference) {
+            if (PrefRateApp != null) {
+                PrefRateApp.setOnPreferenceClickListener(preference -> {
                     Log.d(TAG, "onPreferenceClick: ");
                     String url = "";
                     if (InstallSource.getInstallSource(getActivity()).equals(InstallSource.GOOGLE_PLAY_STORE)) {
@@ -66,59 +82,56 @@ public class SettingsActivity extends AppCompatActivity {
                     Uri uri = Uri.parse(url);
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(intent);
-
                     return true;
-                }
-            });
-
+                });
+            }
 
             Preference SecPri = findPreference("secpri");
-            SecPri.setOnPreferenceClickListener(new Preference.OnPreferenceClickListener() {
-                public boolean onPreferenceClick(Preference preference) {
+            if (SecPri != null) {
+                SecPri.setOnPreferenceClickListener(preference -> {
                     Log.d(TAG, "onPreferenceClick: ");
                     String url = "https://www.ephrine.in/privacy-policy";
-
                     Uri uri = Uri.parse(url);
                     Intent intent = new Intent(Intent.ACTION_VIEW, uri);
                     startActivity(intent);
-
                     return true;
-                }
-            });
+                });
+            }
 
             String d = cachePref.getString("ocrlang");
             Preference OCRLanguage = findPreference("ocrlang");
-            if (d != null) {
-                int i = Integer.parseInt(d);
-                OCRLanguage.setSummary(LanguageOptionsFull[i]);
-            } else {
-                OCRLanguage.setSummary(LanguageOptionsFull[0]);
-            }
-
-            OCRLanguage.setOnPreferenceChangeListener((preference, newValue) -> {
-                int i = Integer.parseInt(newValue.toString());
-                preference.setSummary(LanguageOptionsFull[i]);
-                return true;
-            });
-
-
-            Preference PrefAppUpdate = findPreference("appupdate");
-            PrefAppUpdate.setOnPreferenceClickListener(preference -> {
-                String url = getString(R.string.PLAY_STORE_URL);
-
-                if (InstallSource.isGalaxyStore(getActivity())) {
-                    url = getString(R.string.GALAXY_STORE_URL);
+            if (OCRLanguage != null) {
+                if (d != null) {
+                    int i = Integer.parseInt(d);
+                    OCRLanguage.setSummary(LanguageOptionsFull[i]);
+                } else {
+                    OCRLanguage.setSummary(LanguageOptionsFull[0]);
                 }
 
-                Uri uri = Uri.parse(url);
-                Intent intent = new Intent(Intent.ACTION_VIEW, uri);
-                startActivity(intent);
+                OCRLanguage.setOnPreferenceChangeListener((preference, newValue) -> {
+                    try {
+                        int i = Integer.parseInt(newValue.toString());
+                        preference.setSummary(LanguageOptionsFull[i]);
+                    } catch (Exception e) {
+                        Log.e(TAG, "Error updating summary", e);
+                    }
+                    return true;
+                });
+            }
 
-                return true;
-
-            });
-
+            Preference PrefAppUpdate = findPreference("appupdate");
+            if (PrefAppUpdate != null) {
+                PrefAppUpdate.setOnPreferenceClickListener(preference -> {
+                    String url = getString(R.string.PLAY_STORE_URL);
+                    if (InstallSource.isGalaxyStore(getActivity())) {
+                        url = getString(R.string.GALAXY_STORE_URL);
+                    }
+                    Uri uri = Uri.parse(url);
+                    Intent intent = new Intent(Intent.ACTION_VIEW, uri);
+                    startActivity(intent);
+                    return true;
+                });
+            }
         }
-
     }
 }

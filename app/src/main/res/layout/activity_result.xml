@@ -4,61 +4,99 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
+    android:background="@drawable/bg_main_gradient"
     android:fitsSystemWindows="true"
     tools:context=".ResultActivity">
 
+    <!-- Header Area -->
     <LinearLayout
-        android:id="@+id/linearLayout"
+        android:id="@+id/headerLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="horizontal"
-        android:padding="5dp"
+        android:padding="20dp"
         app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1"
+            android:fontFamily="sans-serif-black"
+            android:text="Result"
+            android:textColor="@color/primaryColor"
+            android:textSize="28sp" />
+
+        <ImageButton
+            android:id="@+id/CopyButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            android:background="@drawable/btn_teal_clay"
+            android:padding="12dp"
+            android:src="@drawable/ic_baseline_content_copy_24"
+            app:tint="@color/white" />
+    </LinearLayout>
+
+    <!-- Content Card -->
+    <androidx.cardview.widget.CardView
+        android:id="@+id/contentCard"
+        android:layout_width="0dp"
+        android:layout_height="0dp"
+        android:layout_margin="20dp"
+        app:cardCornerRadius="20dp"
+        app:cardElevation="10dp"
+        app:layout_constraintBottom_toTopOf="@+id/actionLayout"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout">
+
+        <RelativeLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
+
+            <EditText
+                android:id="@+id/ResultEditText"
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:background="@android:color/transparent"
+                android:gravity="top"
+                android:hint="Text will appear here..."
+                android:padding="20dp"
+                android:textColor="@color/text_primary"
+                android:textSize="16sp" />
+
+            <!-- Sophisticated Gradient Shadow at bottom of editor -->
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="30dp"
+                android:layout_alignParentBottom="true"
+                android:background="@drawable/card_shadow_purple" />
+        </RelativeLayout>
+    </androidx.cardview.widget.CardView>
+
+    <!-- Bottom Actions -->
+    <LinearLayout
+        android:id="@+id/actionLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:padding="20dp"
+        app:layout_constraintBottom_toTopOf="@+id/AdFrameLayout">
 
         <Button
             android:id="@+id/SummarizeButton"
-            style="@style/Widget.Material3.Button.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
+            style="@style/Widget.textX.Button.Purple"
+            android:layout_width="match_parent"
+            android:layout_height="64dp"
             android:text="AI Summarize"
-            android:textSize="16sp"
-            app:icon="@drawable/ic_baseline_translate_24" />
-
-        <Space
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1" />
-
-        <Button
-            android:id="@+id/CopyButton"
-            style="@style/Widget.Material3.Button.Icon"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="Copy Text"
-            android:textSize="16sp"
-            app:icon="@drawable/ic_baseline_content_copy_24" />
+            android:textSize="18sp"
+            android:fontFamily="sans-serif-medium"
+            app:icon="@drawable/ic_baseline_translate_24"
+            app:iconSize="24dp" />
     </LinearLayout>
-
-    <EditText
-        android:id="@+id/ResultEditText"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        android:gravity="top"
-        android:inputType="textLongMessage|textAutoCorrect|textMultiLine|textImeMultiLine"
-        android:text="Name"
-        android:textSize="14sp"
-        app:layout_constraintBottom_toTopOf="@+id/AdFrameLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/linearLayout"
-        tools:text="xxxx" />
 
     <FrameLayout
         android:id="@+id/AdFrameLayout"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent">
-
-    </FrameLayout>
+        app:layout_constraintBottom_toBottomOf="parent" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

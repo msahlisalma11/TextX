@@ -1,47 +1,52 @@
 <PreferenceScreen xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto">
-    <Preference
-        android:icon="@mipmap/ic_launcher_round"
-        android:summary="Made with &#10084; in Tunisia"
-        android:title="@string/app_name" />
-    <PreferenceCategory android:title="Settings">
+
+    <PreferenceCategory android:title="@string/settings_recognition">
 
         <SwitchPreference
             android:defaultValue="false"
             android:key="@string/Pref_isMultiline"
-            android:title="Single Line Text"
-            android:summary="After scan, convert multiline text paragraph into single line" />
+            android:title="@string/settings_single_line"
+            android:summary="@string/settings_single_line_desc"
+            app:layout="@layout/preference_clay_card" />
+
+    </PreferenceCategory>
+
+    <PreferenceCategory android:title="@string/settings_language">
 
         <ListPreference
             android:defaultValue="0"
             android:entries="@array/ocr_language"
             android:entryValues="@array/ocr_language_values"
             android:key="ocrlang"
-            android:title="OCR Language" />
+            android:title="@string/settings_ocr_lang"
+            app:layout="@layout/preference_clay_card_amber" />
 
     </PreferenceCategory>
-    <PreferenceCategory android:title="About">
+
+    <PreferenceCategory android:title="@string/settings_about">
         <Preference
             android:key="ratekey"
-            android:title="Rate App 5 Stars" />
+            android:title="@string/settings_rate"
+            app:layout="@layout/preference_clay_card_teal" />
 
         <Preference
             android:summary="@string/app_version_name"
-            android:title="Version" />
+            android:title="Version"
+            app:layout="@layout/preference_clay_card_teal" />
 
         <Preference
-            android:summary="@string/app_version_code"
-            android:title="Build Number" />
-        <Preference
             android:key="appupdate"
-            android:title="Check for Update" />
+            android:title="@string/settings_check_update"
+            app:layout="@layout/preference_clay_card_teal" />
 
     </PreferenceCategory>
 
     <PreferenceCategory android:title="More">
         <Preference
             android:key="secpri"
-            android:title="Privacy Policy" />
+            android:title="@string/settings_privacy"
+            app:layout="@layout/preference_clay_card" />
 
     </PreferenceCategory>
 </PreferenceScreen>

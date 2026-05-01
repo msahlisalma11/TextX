@@ -21,7 +21,7 @@
 
             <!-- Logo Section -->
             <TextView
-                android:id="@+id/registerTitle"
+                android:id="@+id/loginTitle"
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
                 android:fontFamily="sans-serif-black"
@@ -38,7 +38,7 @@
                 android:textColor="@color/text_primary"
                 android:textSize="16sp" />
 
-            <!-- Register Card -->
+            <!-- Login Card -->
             <androidx.cardview.widget.CardView
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
@@ -51,7 +51,7 @@
                     android:background="@color/white">
 
                     <LinearLayout
-                        android:id="@+id/registerFormContent"
+                        android:id="@+id/formContent"
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
                         android:orientation="vertical"
@@ -62,7 +62,7 @@
                             android:layout_height="wrap_content"
                             android:layout_marginBottom="24dp"
                             android:fontFamily="sans-serif-medium"
-                            android:text="Créer un compte"
+                            android:text="Connexion"
                             android:textColor="@color/text_primary"
                             android:textSize="24sp" />
 
@@ -81,31 +81,31 @@
                             android:id="@+id/passwordInput"
                             android:layout_width="match_parent"
                             android:layout_height="56dp"
-                            android:layout_marginBottom="16dp"
+                            android:layout_marginBottom="24dp"
                             android:background="@drawable/input_background_clay"
                             android:hint="Mot de passe"
                             android:inputType="textPassword"
                             android:paddingHorizontal="20dp"
                             android:textColor="@color/text_primary" />
 
-                        <EditText
-                            android:id="@+id/confirmPasswordInput"
-                            android:layout_width="match_parent"
-                            android:layout_height="56dp"
-                            android:layout_marginBottom="24dp"
-                            android:background="@drawable/input_background_clay"
-                            android:hint="Confirmer mot de passe"
-                            android:inputType="textPassword"
-                            android:paddingHorizontal="20dp"
-                            android:textColor="@color/text_primary" />
-
                         <Button
-                            android:id="@+id/registerButton"
+                            android:id="@+id/loginButton"
                             style="@style/Widget.textX.Button.Purple"
                             android:layout_width="match_parent"
                             android:layout_height="60dp"
-                            android:text="S'inscrire"
+                            android:layout_marginBottom="16dp"
+                            android:text="Se connecter"
                             android:textSize="16sp" />
+
+                        <Button
+                            android:id="@+id/googleButton"
+                            style="@style/Widget.textX.Button.Teal"
+                            android:layout_width="match_parent"
+                            android:layout_height="60dp"
+                            android:text="Connexion avec Google"
+                            android:textSize="16sp"
+                            app:icon="@drawable/ic_baseline_translate_24"
+                            app:iconGravity="textStart" />
 
                         <LinearLayout
                             android:layout_width="wrap_content"
@@ -117,15 +117,15 @@
                             <TextView
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
-                                android:text="Déjà inscrit? "
+                                android:text="Pas de compte? "
                                 android:textColor="@color/text_secondary" />
 
                             <TextView
-                                android:id="@+id/loginLink"
+                                android:id="@+id/registerLink"
                                 android:layout_width="wrap_content"
                                 android:layout_height="wrap_content"
                                 android:fontFamily="sans-serif-medium"
-                                android:text="Connecte-toi"
+                                android:text="Inscris-toi"
                                 android:textColor="@color/accent_purple" />
                         </LinearLayout>
                     </LinearLayout>
@@ -134,7 +134,7 @@
                     <View
                         android:layout_width="match_parent"
                         android:layout_height="30dp"
-                        android:layout_alignBottom="@+id/registerFormContent"
+                        android:layout_alignBottom="@+id/formContent"
                         android:layout_alignParentBottom="true"
                         android:background="@drawable/card_shadow_purple" />
                 </RelativeLayout>

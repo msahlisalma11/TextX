@@ -1,0 +1,55 @@
+{
+  "project_info": {
+    "project_number": "833690862091",
+    "project_id": "textx-c8275",
+    "storage_bucket": "textx-c8275.firebasestorage.app"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:833690862091:android:a5224c2305f9a4eb4fbd0e",
+        "android_client_info": {
+          "package_name": "devesh.app.ocr"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "833690862091-4seo1v0liaj7928na8ok2mn8ao5evmb3.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "devesh.app.ocr",
+            "certificate_hash": "290a8eabdd9b20dacef16ca3dc20c7dc982fa2c2"
+          }
+        },
+        {
+          "client_id": "833690862091-gh4a1jfnhjdo0e7cvud3h2nno4qampfl.apps.googleusercontent.com",
+          "client_type": 1,
+          "android_info": {
+            "package_name": "devesh.app.ocr",
+            "certificate_hash": "3f7575c51bee68305e0506d750a70a7668a97ba2"
+          }
+        },
+        {
+          "client_id": "833690862091-36c11mvdd2jpoctjeesu1sssdn4eod2r.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDgxxOPSUu0FwX8D1LyumvahkqJv2WnmPI"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "833690862091-36c11mvdd2jpoctjeesu1sssdn4eod2r.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

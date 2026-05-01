@@ -2,12 +2,8 @@ package devesh.app.ocr.camera;
 
 import android.Manifest;
 import android.content.pm.PackageManager;
-import android.graphics.Bitmap;
-import android.graphics.BitmapFactory;
-import android.graphics.ImageFormat;
-import android.graphics.Rect;
-import android.graphics.YuvImage;
-import android.media.Image;
+import android.graphics.LinearGradient;
+import android.graphics.Shader;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.LayoutInflater;
@@ -29,9 +25,7 @@ import androidx.fragment.app.Fragment;
 import com.google.android.material.dialog.MaterialAlertDialogBuilder;
 import com.google.common.util.concurrent.ListenableFuture;
 
-import java.io.ByteArrayOutputStream;
 import java.io.File;
-import java.nio.ByteBuffer;
 import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
@@ -79,6 +73,8 @@ public class CameraFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
         
+        applyTitleGradient();
+
         mBinding.imageCaptureButton.setOnClickListener(v -> onClick());
         mBinding.FlashButton.setOnClickListener(v -> ToggleFlash());
         mBinding.SettingsButton.setOnClickListener(v -> ((MainActivity) getActivity()).OpenSettings());
@@ -95,6 +91,19 @@ public class CameraFragment extends Fragment {
         }
 
         setFlashButton();
+    }
+
+    private void applyTitleGradient() {
+        mBinding.appNameTitle.post(() -> {
+            float width = mBinding.appNameTitle.getPaint().measureText(mBinding.appNameTitle.getText().toString());
+            Shader textShader = new LinearGradient(0, 0, width, 0,
+                    new int[]{
+                            ContextCompat.getColor(requireContext(), R.color.accent_purple),
+                            ContextCompat.getColor(requireContext(), R.color.accent_teal)
+                    }, null, Shader.TileMode.CLAMP);
+            mBinding.appNameTitle.getPaint().setShader(textShader);
+            mBinding.appNameTitle.invalidate();
+        });
     }
 
     private void showLanguageDialog() {

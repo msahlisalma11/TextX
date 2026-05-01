@@ -1,16 +1,48 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
+    <!-- Core App Colors -->
+    <color name="primaryColor">#7F77DD</color>
+    <color name="primaryLightColor">#F5E6FF</color>
+    <color name="primaryDarkColor">#6A61C2</color>
+    <color name="secondaryColor">#5DCAA5</color>
+    <color name="secondaryLightColor">#E8F5EE</color>
+    <color name="secondaryDarkColor">#4EB08D</color>
 
-    <color name="primaryColor">#6200ea</color>
-     <color name="primaryLightColor">#9d46ff</color>
-     <color name="primaryDarkColor">#0a00b6</color>
-     <color name="secondaryColor">#2962ff</color>
-     <color name="secondaryLightColor">#768fff</color>
-     <color name="secondaryDarkColor">#0039cb</color>
-     <color name="primaryTextColor">#ffffff</color>
-     <color name="secondaryTextColor">#ffffff</color>
+    <!-- Legacy Color Names for Compatibility -->
+    <color name="primaryTextColor">#333333</color>
+    <color name="secondaryTextColor">#757575</color>
 
+    <color name="black">#2D2D2D</color>
+    <color name="white">#FFFFFF</color>
 
-     <color name="black">#FF000000</color>
-     <color name="white">#FFFFFFFF</color>
+    <!-- Neutral Backgrounds -->
+    <color name="bg_start">#F8F9FB</color>
+    <color name="bg_end">#F0F2F8</color>
+
+    <!-- Pastel Gradients -->
+    <color name="purple_start">#F5E6FF</color>
+    <color name="purple_end">#EEE5F8</color>
+    <color name="teal_start">#E8F5EE</color>
+    <color name="teal_end">#E0F0E8</color>
+    <color name="amber_start">#FFF8E8</color>
+    <color name="amber_end">#FAF5E8</color>
+    <color name="blue_start">#E8EEF5</color>
+    <color name="blue_end">#E0E8F0</color>
+
+    <!-- Accent Colors -->
+    <color name="accent_purple">#7F77DD</color>
+    <color name="accent_teal">#5DCAA5</color>
+    <color name="accent_amber">#DAA952</color>
+    <color name="accent_blue">#378ADD</color>
+
+    <!-- Shadow Colors -->
+    <color name="shadow_purple">#267F77DD</color> <!-- 15% opacity -->
+    <color name="shadow_teal">#265DCAA5</color>
+    <color name="shadow_amber">#26DAA952</color>
+    <color name="shadow_blue">#26378ADD</color>
+    <color name="shadow_neutral">#1A000000</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#333333</color>
+    <color name="text_secondary">#757575</color>
 </resources>
