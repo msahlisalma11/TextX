@@ -27,8 +27,6 @@ public class HistoryActivity extends AppCompatActivity implements SearchView.OnQ
     DatabaseTool databaseTool;
     List<ScanFile> scanFileList = new ArrayList<>();
     List<ScanFile> filteredList = new ArrayList<>();
-    devesh.app.ocr.AdMobAPI adMobAPI;
-    boolean isAdShowed;
     HistoryAdapter mAdapter;
 
     // Variables pour le filtrage
@@ -41,11 +39,7 @@ public class HistoryActivity extends AppCompatActivity implements SearchView.OnQ
         super.onCreate(savedInstanceState);
         binding = ActivityHistoryBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        adMobAPI = new AdMobAPI(this);
         databaseTool = new DatabaseTool(this);
-        isAdShowed = false;
-        adMobAPI.LoadInterstitialAd(this);
-        adMobAPI.setAdaptiveBanner(binding.AdFrameLayout, this);
 
         // Setup RecyclerView une seule fois
         mAdapter = new HistoryAdapter(this, filteredList);
@@ -70,13 +64,7 @@ public class HistoryActivity extends AppCompatActivity implements SearchView.OnQ
 
     @Override
     public void onBackPressed() {
-        if (isAdShowed) {
-            super.onBackPressed();
-        } else {
-            adMobAPI.ShowInterstitialAd();
-            isAdShowed = true;
-            super.onBackPressed();
-        }
+        super.onBackPressed();
     }
 
     @Override
@@ -208,7 +196,7 @@ public class HistoryActivity extends AppCompatActivity implements SearchView.OnQ
             } else if (scan.keywords != null && scan.keywords.toLowerCase().contains(queryLower)) {
                 matches = true;
             }
-            
+
             if (matches) {
                 filtered.add(scan);
             }
@@ -235,6 +223,7 @@ public class HistoryActivity extends AppCompatActivity implements SearchView.OnQ
             Log.d(TAG, "OpenHistoryFile: " + position);
             Intent resultActivity = new Intent(this, ResultActivity.class);
             resultActivity.putExtra("text", filteredList.get(position).text);
+            resultActivity.putExtra("uid", filteredList.get(position).uid);
             resultActivity.putExtra("ad2db", "no");
             startActivity(resultActivity);
         }

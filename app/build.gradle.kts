@@ -45,12 +45,14 @@ dependencies {
     implementation(libs.app.update)
     implementation(libs.app.update.ktx)
     implementation(libs.review.ktx)
-    implementation(libs.play.services.ads)
-    implementation(libs.user.messaging.platform)
+
+    // REMOVED: AdMob dependencies
+    // implementation(libs.play.services.ads)
+    // implementation(libs.user.messaging.platform)
 
     implementation(libs.room.runtime)
     implementation(libs.room.ktx)
-    annotationProcessor(libs.room.compiler)  // ✅ CHANGÉ
+    annotationProcessor(libs.room.compiler)
 
     implementation(libs.billing)
     implementation(libs.camera.core)

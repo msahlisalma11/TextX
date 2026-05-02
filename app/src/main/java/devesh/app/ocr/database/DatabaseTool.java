@@ -34,6 +34,10 @@ public class DatabaseTool {
         return userDao.findByText(text);
     }
 
+    public void delete(ScanFile scanFile) {
+        userDao.delete(scanFile);
+    }
+
     public void clearHistory(){
         userDao.nukeTable();
     }

@@ -9,35 +9,34 @@ import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
-
 import devesh.app.ocr.database.DatabaseTool;
 import devesh.app.ocr.database.ScanFile;
 import devesh.app.ocr.databinding.ActivityResultBinding;
 import devesh.app.ocr.utils.AppReviewTask;
 import devesh.app.ocr.utils.CachePref;
-import devesh.app.ocr.utils.InstallSource;
 
 public class ResultActivity extends AppCompatActivity {
     String TAG = "ResultAct:";
     ActivityResultBinding binding;
     DatabaseTool databaseTool;
-    AdMobAPI adMobAPI;
-    boolean isAdShowed;
     AppReviewTask appReviewTask;
     String text;
     CachePref cachePref;
+    int uid = -1;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         binding = ActivityResultBinding.inflate(getLayoutInflater());
         setContentView(binding.getRoot());
-        adMobAPI = new AdMobAPI(this);
         cachePref = new CachePref(this);
+        databaseTool = new DatabaseTool(this);
+        
         Intent intent = getIntent();
-        isAdShowed = false;
 
         text = intent.getStringExtra("text");
+        uid = intent.getIntExtra("uid", -1);
+        
         boolean isSingleLine = cachePref.getBoolean(getString(R.string.Pref_isMultiline));
         Log.d(TAG, "onCreate: isSingleLine: " + isSingleLine);
         String Add2DB = "yes";
@@ -56,65 +55,64 @@ public class ResultActivity extends AppCompatActivity {
 
         if (isSingleLine) {
             text = text.replaceAll("\\s+", " ");
-
         }
         binding.ResultEditText.setText(text);
 
-        if (Add2DB.equals("yes")) {
-
-            databaseTool = new DatabaseTool(this);
+        if (Add2DB != null && Add2DB.equals("yes")) {
             ScanFile scanFile = new ScanFile();
             scanFile.text = text;
             scanFile.time = System.currentTimeMillis();
             databaseTool.Add(scanFile);
-
         }
+
+        binding.backButton.setOnClickListener(v -> finish());
+        
         binding.CopyButton.setOnClickListener(view -> {
-            CopyText(text);
+            CopyText(binding.ResultEditText.getText().toString());
         });
 
-        binding.SummarizeButton.setOnClickListener(view -> {
-            Intent summarizeIntent = new Intent(this, NoteDetailActivity.class);
-            summarizeIntent.putExtra("extra_text", text);
-            startActivity(summarizeIntent);
+        binding.ShareButton.setOnClickListener(view -> {
+            ShareText(binding.ResultEditText.getText().toString());
         });
 
-        // Essential For Galaxy App Store Policy
-        if(!InstallSource.isGalaxyStore(this)){
-            adMobAPI.LoadInterstitialAd(this);
-        }
+        binding.EditButton.setOnClickListener(view -> {
+            binding.ResultEditText.requestFocus();
+            Toast.makeText(this, "Editing enabled", Toast.LENGTH_SHORT).show();
+        });
 
+        binding.DeleteButton.setOnClickListener(view -> {
+            if (uid != -1) {
+                ScanFile scanToDelete = new ScanFile();
+                scanToDelete.uid = uid;
+                databaseTool.delete(scanToDelete);
+                Toast.makeText(this, "Deleted from History", Toast.LENGTH_SHORT).show();
+            }
+            finish();
+        });
 
-        adMobAPI.setAdaptiveBanner(binding.AdFrameLayout, this);
+        // App Review
         appReviewTask = new AppReviewTask(this, this);
         appReviewTask.requestAppReview();
     }
 
     @Override
     public void onBackPressed() {
-        if (isAdShowed) {
-            super.onBackPressed();
-        } else {
-            super.onBackPressed();
-
-            if(!InstallSource.isGalaxyStore(this)) {
-                adMobAPI.ShowInterstitialAd();
-            }
-
-            isAdShowed = true;
-        }
-
-
+        super.onBackPressed();
     }
 
     void CopyText(String text) {
-
         ClipboardManager clipboard = (ClipboardManager) getSystemService(CLIPBOARD_SERVICE);
         ClipData clip = ClipData.newPlainText("OCR", text);
         clipboard.setPrimaryClip(clip);
         Toast.makeText(this, "Copied to Clipboard", Toast.LENGTH_SHORT).show();
-
     }
 
-
+    void ShareText(String text) {
+        Intent sendIntent = new Intent();
+        sendIntent.setAction(Intent.ACTION_SEND);
+        sendIntent.putExtra(Intent.EXTRA_TEXT, text);
+        sendIntent.setType("text/plain");
+        Intent shareIntent = Intent.createChooser(sendIntent, null);
+        startActivity(shareIntent);
+    }
 }

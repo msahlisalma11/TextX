@@ -4,99 +4,265 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:background="@drawable/bg_main_gradient"
-    android:fitsSystemWindows="true"
-    tools:context=".ResultActivity">
+    android:background="#F8F9FE"
+    android:fitsSystemWindows="true">
 
-    <!-- Header Area -->
-    <LinearLayout
-        android:id="@+id/headerLayout"
+    <!-- Top Bar -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/topBar"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal"
-        android:padding="20dp"
+        android:layout_height="72dp"
+        android:paddingHorizontal="24dp"
         app:layout_constraintTop_toTopOf="parent">
 
-        <TextView
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_weight="1"
-            android:fontFamily="sans-serif-black"
-            android:text="Result"
-            android:textColor="@color/primaryColor"
-            android:textSize="28sp" />
-
-        <ImageButton
-            android:id="@+id/CopyButton"
+        <androidx.cardview.widget.CardView
+            android:id="@+id/backButton"
             android:layout_width="48dp"
             android:layout_height="48dp"
-            android:background="@drawable/btn_teal_clay"
-            android:padding="12dp"
-            android:src="@drawable/ic_baseline_content_copy_24"
-            app:tint="@color/white" />
-    </LinearLayout>
+            app:cardBackgroundColor="#E3F2FD"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
 
-    <!-- Content Card -->
+            <ImageView
+                android:layout_width="24dp"
+                android:layout_height="24dp"
+                android:layout_gravity="center"
+                android:src="@drawable/ic_arrow_back_black_48dp"
+                app:tint="#1565C0" />
+        </androidx.cardview.widget.CardView>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:gravity="center"
+            android:orientation="horizontal"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@id/rightButton"
+            app:layout_constraintStart_toEndOf="@id/backButton"
+            app:layout_constraintTop_toTopOf="parent">
+
+            <ImageView
+                android:layout_width="20dp"
+                android:layout_height="20dp"
+                android:src="@drawable/ic_baseline_article_24"
+                android:alpha="0.6" />
+
+            <TextView
+                android:id="@+id/titleText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="8dp"
+                android:fontFamily="sans-serif-medium"
+                android:text="Contract"
+                android:textColor="#333333"
+                android:textSize="18sp" />
+        </LinearLayout>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/rightButton"
+            android:layout_width="48dp"
+            android:layout_height="48dp"
+            app:cardBackgroundColor="#FFF9C4"
+            app:cardCornerRadius="12dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent">
+            <!-- Placeholder for right button icon if needed -->
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+    <!-- Main Text Card -->
     <androidx.cardview.widget.CardView
         android:id="@+id/contentCard"
-        android:layout_width="0dp"
+        android:layout_width="match_parent"
         android:layout_height="0dp"
-        android:layout_margin="20dp"
-        app:cardCornerRadius="20dp"
-        app:cardElevation="10dp"
-        app:layout_constraintBottom_toTopOf="@+id/actionLayout"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/headerLayout">
+        android:layout_marginHorizontal="24dp"
+        android:layout_marginVertical="16dp"
+        app:cardCornerRadius="24dp"
+        app:cardElevation="2dp"
+        app:layout_constraintBottom_toTopOf="@id/buttonsGrid"
+        app:layout_constraintTop_toBottomOf="@id/topBar">
 
-        <RelativeLayout
+        <EditText
+            android:id="@+id/ResultEditText"
             android:layout_width="match_parent"
-            android:layout_height="match_parent">
-
-            <EditText
-                android:id="@+id/ResultEditText"
-                android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:background="@android:color/transparent"
-                android:gravity="top"
-                android:hint="Text will appear here..."
-                android:padding="20dp"
-                android:textColor="@color/text_primary"
-                android:textSize="16sp" />
-
-            <!-- Sophisticated Gradient Shadow at bottom of editor -->
-            <View
-                android:layout_width="match_parent"
-                android:layout_height="30dp"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/card_shadow_purple" />
-        </RelativeLayout>
+            android:layout_height="match_parent"
+            android:background="@android:color/transparent"
+            android:gravity="top"
+            android:padding="24dp"
+            android:textColor="#333333"
+            android:textSize="16sp"
+            android:lineSpacingExtra="4dp" />
     </androidx.cardview.widget.CardView>
 
-    <!-- Bottom Actions -->
-    <LinearLayout
-        android:id="@+id/actionLayout"
+    <!-- Buttons Grid -->
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:id="@+id/buttonsGrid"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:padding="20dp"
-        app:layout_constraintBottom_toTopOf="@+id/AdFrameLayout">
+        android:padding="24dp"
+        app:layout_constraintBottom_toBottomOf="parent">
 
-        <Button
-            android:id="@+id/SummarizeButton"
-            style="@style/Widget.textX.Button.Purple"
-            android:layout_width="match_parent"
-            android:layout_height="64dp"
-            android:text="AI Summarize"
-            android:textSize="18sp"
-            android:fontFamily="sans-serif-medium"
-            app:icon="@drawable/ic_baseline_translate_24"
-            app:iconSize="24dp" />
-    </LinearLayout>
+        <androidx.cardview.widget.CardView
+            android:id="@+id/CopyButton"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="8dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/purple_light"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toTopOf="@id/EditButton"
+            app:layout_constraintEnd_toStartOf="@+id/ShareButton"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
 
-    <FrameLayout
-        android:id="@+id/AdFrameLayout"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        app:layout_constraintBottom_toBottomOf="parent" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_baseline_content_copy_24"
+                    app:tint="@color/purple_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="Copy"
+                    android:textColor="@color/purple_primary" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/ShareButton"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginBottom="16dp"
+            app:cardBackgroundColor="@color/green_light"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toTopOf="@id/DeleteButton"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/CopyButton"
+            app:layout_constraintTop_toTopOf="parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_baseline_share_24"
+                    app:tint="@color/green_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="Share"
+                    android:textColor="@color/green_primary" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/EditButton"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginEnd="8dp"
+            app:cardBackgroundColor="@color/orange_light"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toStartOf="@+id/DeleteButton"
+            app:layout_constraintStart_toStartOf="parent"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_baseline_article_24"
+                    app:tint="@color/orange_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="Edit"
+                    android:textColor="@color/orange_primary" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+        <androidx.cardview.widget.CardView
+            android:id="@+id/DeleteButton"
+            android:layout_width="0dp"
+            android:layout_height="100dp"
+            android:layout_marginStart="8dp"
+            app:cardBackgroundColor="@color/blue_light"
+            app:cardCornerRadius="16dp"
+            app:cardElevation="0dp"
+            app:layout_constraintBottom_toBottomOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toEndOf="@id/EditButton"
+            android:clickable="true"
+            android:focusable="true"
+            android:foreground="?attr/selectableItemBackground">
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:gravity="center"
+                android:orientation="vertical">
+
+                <ImageView
+                    android:layout_width="32dp"
+                    android:layout_height="32dp"
+                    android:src="@drawable/ic_baseline_auto_delete_24"
+                    app:tint="@color/blue_primary" />
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="8dp"
+                    android:fontFamily="sans-serif-bold"
+                    android:text="Delete"
+                    android:textColor="@color/blue_primary" />
+            </LinearLayout>
+        </androidx.cardview.widget.CardView>
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>

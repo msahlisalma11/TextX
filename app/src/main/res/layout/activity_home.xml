@@ -1,6 +1,101 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent">
-    <!-- Home activity layout elements go here -->
-</RelativeLayout>
+    android:layout_height="match_parent"
+    android:background="#F8F9FE">
+
+    <!-- Top Dots -->
+    <TextView
+        android:id="@+id/topDots"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="16dp"
+        android:layout_marginEnd="16dp"
+        android:text="•••••"
+        android:textColor="#BBBBBB"
+        android:textSize="18sp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintTop_toTopOf="parent" />
+
+    <LinearLayout
+        android:id="@+id/headerLayout"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="60dp"
+        android:orientation="vertical"
+        android:padding="24dp"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <TextView
+            android:id="@+id/appNameTitle"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:fontFamily="sans-serif-black"
+            android:text="@string/app_name"
+            android:textColor="#7C77E8"
+            android:textSize="48sp" />
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="8dp"
+            android:text="@string/home_subtitle"
+            android:textColor="#666666"
+            android:textSize="18sp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="40dp"
+        android:orientation="vertical"
+        android:padding="24dp"
+        app:layout_constraintTop_toBottomOf="@id/headerLayout">
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_take_photo"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:layout_marginBottom="16dp"
+            android:backgroundTint="#7C77E8"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/take_photo"
+            android:textAllCaps="false"
+            android:textColor="@color/white"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:cornerRadius="24dp"
+            app:elevation="4dp" />
+
+        <com.google.android.material.button.MaterialButton
+            android:id="@+id/btn_choose_image"
+            android:layout_width="match_parent"
+            android:layout_height="72dp"
+            android:backgroundTint="#E8F5E9"
+            android:insetTop="0dp"
+            android:insetBottom="0dp"
+            android:text="@string/choose_image"
+            android:textAllCaps="false"
+            android:textColor="#2E7D32"
+            android:textSize="20sp"
+            android:textStyle="bold"
+            app:cornerRadius="24dp"
+            app:elevation="2dp"
+            app:rippleColor="#22000000" />
+
+    </LinearLayout>
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginBottom="32dp"
+        android:text="@string/made_in_tunisia"
+        android:textColor="#999999"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent" />
+
+</androidx.constraintlayout.widget.ConstraintLayout>

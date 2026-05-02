@@ -20,6 +20,7 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseAuthInvalidCredentialsException;
 import com.google.firebase.auth.FirebaseAuthInvalidUserException;
 import com.google.firebase.auth.GoogleAuthProvider;
+import com.textx.ui.activities.HomeActivity;
 
 public class LoginActivity extends AppCompatActivity {
 
@@ -63,7 +64,7 @@ public class LoginActivity extends AppCompatActivity {
 
         // Check if already logged in
         if (auth.getCurrentUser() != null) {
-            startActivity(new Intent(LoginActivity.this, MainActivity.class));
+            startActivity(new Intent(LoginActivity.this, HomeActivity.class));
             finish();
         }
 
@@ -94,7 +95,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(task -> {
                     loginButton.setEnabled(true);
                     if (task.isSuccessful()) {
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                         finish();
                     } else {
                         String errorMsg = "Erreur de connexion";
@@ -120,7 +121,7 @@ public class LoginActivity extends AppCompatActivity {
                 .addOnCompleteListener(this, task -> {
                     googleButton.setEnabled(true);
                     if (task.isSuccessful()) {
-                        startActivity(new Intent(LoginActivity.this, MainActivity.class));
+                        startActivity(new Intent(LoginActivity.this, HomeActivity.class));
                         finish();
                     } else {
                         Toast.makeText(LoginActivity.this, "Authentication Failed.", Toast.LENGTH_SHORT).show();

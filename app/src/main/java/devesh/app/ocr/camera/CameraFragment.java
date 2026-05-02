@@ -30,7 +30,6 @@ import java.util.concurrent.ExecutionException;
 import java.util.concurrent.ExecutorService;
 import java.util.concurrent.Executors;
 
-import devesh.app.ocr.AdMobAPI;
 import devesh.app.ocr.MainActivity;
 import devesh.app.ocr.R;
 import devesh.app.ocr.databinding.FragmentCameraBinding;
@@ -48,7 +47,6 @@ public class CameraFragment extends Fragment {
     Preview preview;
     boolean isLandscape;
     ProcessCameraProvider cameraProvider;
-    AdMobAPI adMobAPI;
     int DefaultLanguageMode = 0;
     ImageCapture imageCapture;
     ExecutorService cameraExecutor = Executors.newFixedThreadPool(2);
@@ -72,7 +70,7 @@ public class CameraFragment extends Fragment {
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
-        
+
         applyTitleGradient();
 
         mBinding.imageCaptureButton.setOnClickListener(v -> onClick());
@@ -133,16 +131,12 @@ public class CameraFragment extends Fragment {
         isLandscape = false;
         isFlashAvailable = true;
         cachePref = new CachePref(requireActivity());
-        adMobAPI = new AdMobAPI(requireActivity());
         cameraProviderFuture = ProcessCameraProvider.getInstance(requireActivity());
     }
 
     @Override
     public void onResume() {
         super.onResume();
-        if (mBinding != null) {
-            adMobAPI.setAdaptiveBanner(mBinding.AdFrame, getActivity());
-        }
         startCamera();
     }
 
@@ -162,20 +156,18 @@ public class CameraFragment extends Fragment {
     @Override
     public void onPause() {
         super.onPause();
-        try {
-            adMobAPI.DestroyAds();
-            if (mBinding != null) {
-                mBinding.AdFrame.removeAllViewsInLayout();
-            }
-        } catch (Exception e) {
-            Log.e(TAG, "onPause error: ", e);
-        }
     }
 
     void ToggleFlash() {
         if (camera != null && camera.getCameraInfo().getTorchState().getValue() != null) {
             boolean isTorchOn = camera.getCameraInfo().getTorchState().getValue() == TorchState.ON;
             camera.getCameraControl().enableTorch(!isTorchOn);
+            
+            if (isTorchOn) {
+                mBinding.FlashIcon.setImageResource(R.drawable.ic_baseline_flash_off_24);
+            } else {
+                mBinding.FlashIcon.setImageResource(R.drawable.ic_baseline_flash_on_24);
+            }
         }
     }
 
@@ -201,6 +193,15 @@ public class CameraFragment extends Fragment {
 
             isFlashAvailable = camera.getCameraInfo().hasFlashUnit();
             setFlashButton();
+
+            camera.getCameraInfo().getTorchState().observe(getViewLifecycleOwner(), state -> {
+                if (state == TorchState.ON) {
+                    mBinding.FlashIcon.setImageResource(R.drawable.ic_baseline_flash_off_24);
+                } else {
+                    mBinding.FlashIcon.setImageResource(R.drawable.ic_baseline_flash_on_24);
+                }
+            });
+
         } catch (Exception e) {
             Log.e(TAG, "bindPreview error: " + e);
         }
@@ -209,9 +210,6 @@ public class CameraFragment extends Fragment {
     @Override
     public void onDestroyView() {
         super.onDestroyView();
-        try {
-            adMobAPI.DestroyAds();
-        } catch (Exception ignored) {}
         mBinding = null;
     }
 
@@ -223,13 +221,13 @@ public class CameraFragment extends Fragment {
 
     public void onClick() {
         if (imageCapture == null) return;
-        
+
         ((MainActivity) getActivity()).ShowLoader(true);
         File photoFile = new File(requireActivity().getFilesDir(), "img_cache.png");
-        
+
         ImageCapture.OutputFileOptions outputFileOptions =
                 new ImageCapture.OutputFileOptions.Builder(photoFile).build();
-                
+
         imageCapture.takePicture(outputFileOptions, cameraExecutor,
                 new ImageCapture.OnImageSavedCallback() {
                     @Override
