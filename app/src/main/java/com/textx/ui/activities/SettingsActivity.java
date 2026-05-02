@@ -3,6 +3,7 @@ package com.textx.ui.activities;
 
 import android.os.Bundle;
 import androidx.appcompat.app.AppCompatActivity;
+import devesh.app.ocr.R;
 
 public class SettingsActivity extends AppCompatActivity {
     @Override

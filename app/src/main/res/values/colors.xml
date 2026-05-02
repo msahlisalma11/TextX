@@ -1,6 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="primary">#FF6200EE</color>
-    <color name="primaryDark">#FF3700B3</color>
-    <color name="accent">#FF03DAC5</color>
-    <!-- Additional colors go here -->
+    <color name="ic_launcher_background">#FFFFFF</color>
+    <!-- Base Colors -->
+    <color name="primary">#6750A4</color>
+    <color name="primaryDark">#4F378B</color>
+    <color name="accent">#03DAC5</color>
+
+    <!-- Theme Colors -->
+    <color name="primaryColor">#6750A4</color>
+    <color name="primaryLightColor">#EADDFF</color>
+    <color name="primaryDarkColor">#21005D</color>
+    <color name="secondaryColor">#625B71</color>
+    <color name="secondaryLightColor">#E8DEF8</color>
+
+    <color name="white">#FFFFFF</color>
+    <color name="black">#000000</color>
+
+    <!-- Background and UI Elements -->
+    <color name="bg_start">#F3EDF7</color>
+    <color name="bg_end">#E6E0E9</color>
+    <color name="accent_purple">#7C4DFF</color>
+    <color name="accent_teal">#018786</color>
+    <color name="accent_amber">#FFD600</color>
+
+    <!-- Text Colors -->
+    <color name="text_primary">#1C1B1F</color>
+    <color name="text_secondary">#49454F</color>
+    <color name="primaryTextColor">#1C1B1F</color>
+
+    <!-- Component Colors (Chips, Gradients, Shadows) -->
+    <color name="teal_start">#00BFA5</color>
+    <color name="purple_start">#9C27B0</color>
+    <color name="amber_start">#FFAB00</color>
+    <color name="blue_start">#2979FF</color>
+
+    <color name="shadow_teal">#1A00BFA5</color>
+    <color name="shadow_blue">#1A2979FF</color>
+    <color name="shadow_purple">#1A9C27B0</color>
+    <color name="shadow_amber">#1AFFAB00</color>
+
+    <color name="orange_light">#FFF3E0</color>
+    <color name="purple_light">#F3E5F5</color>
+    <color name="green_light">#E8F5E9</color>
+    <color name="blue_light">#E3F2FD</color>
+
+    <color name="purple_primary">#673AB7</color>
+    <color name="green_primary">#2E7D32</color>
+    <color name="orange_primary">#E65100</color>
+    <color name="blue_primary">#1565C0</color>
 </resources>

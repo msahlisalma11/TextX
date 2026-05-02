@@ -1,6 +1,3 @@
 <?xml version="1.0" encoding="utf-8"?>
 <ad-services-config>
-   <attestation>
-       <consent-manager-config-url>https://adservice.google.com/privacy/ads/consent/manager/config</consent-manager-config-url>
-   </attestation>
 </ad-services-config>

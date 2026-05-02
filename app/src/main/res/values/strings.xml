@@ -6,15 +6,6 @@
     <string name="app_version_name">1.0</string>
     <string name="app_version_code">1</string>
 
-    <!-- AdMob App ID - Replace with your own ID -->
-    <string name="AdMob_App_Id" translatable="false">ca-app-pub-3940256099942544~3347511713</string>
-
-    <!-- AdMob Unit IDs (Test IDs) -->
-    <string name="AdMob_Banner_Id1" translatable="false">ca-app-pub-3940256099942544/6300978111</string>
-    <string name="AdMob_Int_Id1" translatable="false">ca-app-pub-3940256099942544/1033173712</string>
-    <string name="AdMob_RewardedAds_Id1" translatable="false">ca-app-pub-3940256099942544/5224354917</string>
-    <string name="AdMob_NativeAd1" translatable="false">ca-app-pub-3940256099942544/2247696110</string>
-
     <string name="Pref_isAppReviewed">PrefisAppReviewed</string>
     <string name="Pref_isMultiline">onelinetext</string>
     <string name="Pref_isSubscribed">issub</string>
@@ -24,10 +15,11 @@
 
     <!-- UI Strings -->
     <string name="home_subtitle">Extract text from images</string>
+    <string name="extract_text_instantly">Extract text instantly</string>
     <string name="login_subtitle">Extract text from images</string>
     <string name="history_title">History</string>
     <string name="settings_title">Settings</string>
-    <string name="all_scans">All Scans</string>
+    <string name="all_scans">All time</string>
     <string name="summarized">Summarized</string>
     <string name="today">Today</string>
     <string name="no_history">No history found</string>
@@ -38,15 +30,19 @@
     <string name="processing">Processing...</string>
 
     <!-- Settings Strings -->
-    <string name="settings_recognition">Recognition</string>
-    <string name="settings_single_line">Single Line Text</string>
-    <string name="settings_single_line_desc">Convert multiline paragraphs into a single line</string>
-    <string name="settings_language">Language</string>
-    <string name="settings_ocr_lang">OCR Language</string>
+    <string name="settings_recognition">RECOGNITION</string>
+    <string name="settings_single_line">Single line text</string>
+    <string name="settings_single_line_desc">Merge paragraphs</string>
+    <string name="settings_language">LANGUAGE</string>
+    <string name="settings_ocr_lang">OCR language</string>
     <string name="settings_about">About</string>
     <string name="settings_rate">Rate App 5 Stars</string>
     <string name="settings_check_update">Check for Update</string>
     <string name="settings_privacy">Privacy Policy</string>
+
+    <string name="take_photo">📷 Take Photo</string>
+    <string name="choose_image">🖼️ Choose Image</string>
+    <string name="made_in_tunisia">Made with ❤️ in Tunisia</string>
 
     <!--SMS Drive-->
     <string name="MoreApps_SMS_Drive">SMS Drive</string>

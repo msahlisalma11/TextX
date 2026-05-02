@@ -76,12 +76,6 @@ public class MainActivity extends BaseActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        // Check if user is logged in
-        if (!FirebaseAuthManager.isUserLoggedIn()) {
-            startActivity(new Intent(MainActivity.this, LoginActivity.class));
-            finish();
-            return;
-        }
         super.onCreate(savedInstanceState);
         cachePref = new CachePref(this);
         binding = ActivityMainBinding.inflate(getLayoutInflater());
@@ -122,8 +116,11 @@ public class MainActivity extends BaseActivity {
 
         RequestPermission();
 
+        if (getIntent().getBooleanExtra("open_gallery", false)) {
+            openGallery();
+        }
+
         Log.d(TAG, "onCreate:Database");
-        Log.d(TAG, databaseTool.getAll().toString());
     }
 
     @Override
@@ -247,24 +244,6 @@ public class MainActivity extends BaseActivity {
                 resultActivity.putExtra("text", visionText.getText());
                 resultActivity.putExtra("ad2db", "yes");
                 startActivity(resultActivity);
-
-                String resultText = visionText.getText();
-                for (Text.TextBlock block : visionText.getTextBlocks()) {
-                    String blockText = block.getText();
-                    Log.d(TAG, blockText);
-                    for (Text.Line line : block.getLines()) {
-                        String lineText = line.getText();
-                        Point[] lineCornerPoints = line.getCornerPoints();
-                        Rect lineFrame = block.getBoundingBox();
-                        Log.d(TAG, lineText);
-                        for (Text.Element element : line.getElements()) {
-                            String elementText = element.getText();
-                            Point[] elementCornerPoints = element.getCornerPoints();
-                            Rect elementFrame = element.getBoundingBox();
-                            Log.d(TAG, elementText);
-                        }
-                    }
-                }
             }
         }, new OnFailureListener() {
             @Override
